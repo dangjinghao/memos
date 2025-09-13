@@ -3646,6 +3646,9 @@ components:
                     items:
                         type: string
                     description: nsfw_tags is the list of tags that mark content as NSFW for blurring.
+                enableCommentContentSearch:
+                    type: boolean
+                    description: enable_comment_content_search enables searching within comment content.
             description: Memo-related workspace settings and policies.
         WorkspaceSetting_StorageSetting:
             type: object

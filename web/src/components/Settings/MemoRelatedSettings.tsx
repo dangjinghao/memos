@@ -111,6 +111,13 @@ const MemoRelatedSettings = observer(() => {
           onBlur={(event) => updatePartialSetting({ contentLengthLimit: Number(event.target.value) })}
         />
       </div>
+      <div className="w-full flex flex-row justify-between items-center">
+        <span>{t("setting.memo-related-settings.enable-comment-content-search")}</span>
+        <Switch
+          checked={memoRelatedSetting.enableCommentContentSearch}
+          onCheckedChange={(checked) => updatePartialSetting({ enableCommentContentSearch: checked })}
+        />
+      </div>
       <div className="w-full">
         <span className="truncate">{t("setting.memo-related-settings.reactions")}</span>
         <div className="mt-2 w-full flex flex-row flex-wrap gap-1">

@@ -252,15 +252,16 @@ func convertWorkspaceMemoRelatedSettingFromStore(setting *storepb.WorkspaceMemoR
 		return nil
 	}
 	return &v1pb.WorkspaceSetting_MemoRelatedSetting{
-		DisallowPublicVisibility: setting.DisallowPublicVisibility,
-		DisplayWithUpdateTime:    setting.DisplayWithUpdateTime,
-		ContentLengthLimit:       setting.ContentLengthLimit,
-		EnableDoubleClickEdit:    setting.EnableDoubleClickEdit,
-		EnableLinkPreview:        setting.EnableLinkPreview,
-		Reactions:                setting.Reactions,
-		DisableMarkdownShortcuts: setting.DisableMarkdownShortcuts,
-		EnableBlurNsfwContent:    setting.EnableBlurNsfwContent,
-		NsfwTags:                 setting.NsfwTags,
+		DisallowPublicVisibility:   setting.DisallowPublicVisibility,
+		DisplayWithUpdateTime:      setting.DisplayWithUpdateTime,
+		ContentLengthLimit:         setting.ContentLengthLimit,
+		EnableDoubleClickEdit:      setting.EnableDoubleClickEdit,
+		EnableLinkPreview:          setting.EnableLinkPreview,
+		Reactions:                  setting.Reactions,
+		DisableMarkdownShortcuts:   setting.DisableMarkdownShortcuts,
+		EnableBlurNsfwContent:      setting.EnableBlurNsfwContent,
+		NsfwTags:                   setting.NsfwTags,
+		EnableCommentContentSearch: setting.EnableCommentContentSearch,
 	}
 }
 
@@ -269,15 +270,16 @@ func convertWorkspaceMemoRelatedSettingToStore(setting *v1pb.WorkspaceSetting_Me
 		return nil
 	}
 	return &storepb.WorkspaceMemoRelatedSetting{
-		DisallowPublicVisibility: setting.DisallowPublicVisibility,
-		DisplayWithUpdateTime:    setting.DisplayWithUpdateTime,
-		ContentLengthLimit:       setting.ContentLengthLimit,
-		EnableDoubleClickEdit:    setting.EnableDoubleClickEdit,
-		EnableLinkPreview:        setting.EnableLinkPreview,
-		Reactions:                setting.Reactions,
-		DisableMarkdownShortcuts: setting.DisableMarkdownShortcuts,
-		EnableBlurNsfwContent:    setting.EnableBlurNsfwContent,
-		NsfwTags:                 setting.NsfwTags,
+		DisallowPublicVisibility:   setting.DisallowPublicVisibility,
+		DisplayWithUpdateTime:      setting.DisplayWithUpdateTime,
+		ContentLengthLimit:         setting.ContentLengthLimit,
+		EnableDoubleClickEdit:      setting.EnableDoubleClickEdit,
+		EnableLinkPreview:          setting.EnableLinkPreview,
+		Reactions:                  setting.Reactions,
+		DisableMarkdownShortcuts:   setting.DisableMarkdownShortcuts,
+		EnableBlurNsfwContent:      setting.EnableBlurNsfwContent,
+		NsfwTags:                   setting.NsfwTags,
+		EnableCommentContentSearch: setting.EnableCommentContentSearch,
 	}
 }
 

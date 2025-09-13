@@ -296,6 +296,7 @@
     "memo-related-settings": {
       "content-lenght-limit": "Content length limit (Byte)",
       "enable-blur-nsfw-content": "Enable sensitive content (NSFW) blurring",
+      "enable-comment-content-search": "Enable comment content search",
       "enable-link-preview": "Enable link preview",
       "enable-memo-comments": "Enable memo comments",
       "enable-memo-location": "Enable memo location",

@@ -22,10 +22,12 @@ func (s *APIV1Service) ListAllUserStats(ctx context.Context, _ *v1pb.ListAllUser
 
 	normalStatus := store.Normal
 	memoFind := &store.FindMemo{
-		// Exclude comments by default.
-		ExcludeComments: true,
-		ExcludeContent:  true,
-		RowStatus:       &normalStatus,
+		ExcludeContent: true,
+		RowStatus:      &normalStatus,
+	}
+
+	if !workspaceMemoRelatedSetting.EnableCommentContentSearch {
+		memoFind.ExcludeComments = true
 	}
 
 	currentUser, err := s.GetCurrentUser(ctx)
@@ -83,11 +85,9 @@ func (s *APIV1Service) GetUserStats(ctx context.Context, request *v1pb.GetUserSt
 
 	normalStatus := store.Normal
 	memoFind := &store.FindMemo{
-		CreatorID: &userID,
-		// Exclude comments by default.
-		ExcludeComments: true,
-		ExcludeContent:  true,
-		RowStatus:       &normalStatus,
+		CreatorID:      &userID,
+		ExcludeContent: true,
+		RowStatus:      &normalStatus,
 	}
 
 	if currentUser == nil {
@@ -96,14 +96,18 @@ func (s *APIV1Service) GetUserStats(ctx context.Context, request *v1pb.GetUserSt
 		memoFind.VisibilityList = []store.Visibility{store.Public, store.Protected}
 	}
 
-	memos, err := s.Store.ListMemos(ctx, memoFind)
-	if err != nil {
-		return nil, status.Errorf(codes.Internal, "failed to list memos: %v", err)
-	}
-
 	workspaceMemoRelatedSetting, err := s.Store.GetWorkspaceMemoRelatedSetting(ctx)
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to get workspace memo related setting")
+	}
+
+	if !workspaceMemoRelatedSetting.EnableCommentContentSearch {
+		memoFind.ExcludeComments = true
+	}
+
+	memos, err := s.Store.ListMemos(ctx, memoFind)
+	if err != nil {
+		return nil, status.Errorf(codes.Internal, "failed to list memos: %v", err)
 	}
 
 	displayTimestamps := []*timestamppb.Timestamp{}

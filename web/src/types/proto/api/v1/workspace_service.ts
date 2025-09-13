@@ -230,6 +230,8 @@ export interface WorkspaceSetting_MemoRelatedSetting {
   enableBlurNsfwContent: boolean;
   /** nsfw_tags is the list of tags that mark content as NSFW for blurring. */
   nsfwTags: string[];
+  /** enable_comment_content_search enables searching within comment content. */
+  enableCommentContentSearch: boolean;
 }
 
 /** Request message for GetWorkspaceSetting method. */
@@ -905,6 +907,7 @@ function createBaseWorkspaceSetting_MemoRelatedSetting(): WorkspaceSetting_MemoR
     disableMarkdownShortcuts: false,
     enableBlurNsfwContent: false,
     nsfwTags: [],
+    enableCommentContentSearch: false,
   };
 }
 
@@ -936,6 +939,9 @@ export const WorkspaceSetting_MemoRelatedSetting: MessageFns<WorkspaceSetting_Me
     }
     for (const v of message.nsfwTags) {
       writer.uint32(82).string(v!);
+    }
+    if (message.enableCommentContentSearch !== false) {
+      writer.uint32(88).bool(message.enableCommentContentSearch);
     }
     return writer;
   },
@@ -1019,6 +1025,14 @@ export const WorkspaceSetting_MemoRelatedSetting: MessageFns<WorkspaceSetting_Me
           message.nsfwTags.push(reader.string());
           continue;
         }
+        case 11: {
+          if (tag !== 88) {
+            break;
+          }
+
+          message.enableCommentContentSearch = reader.bool();
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -1042,6 +1056,7 @@ export const WorkspaceSetting_MemoRelatedSetting: MessageFns<WorkspaceSetting_Me
     message.disableMarkdownShortcuts = object.disableMarkdownShortcuts ?? false;
     message.enableBlurNsfwContent = object.enableBlurNsfwContent ?? false;
     message.nsfwTags = object.nsfwTags?.map((e) => e) || [];
+    message.enableCommentContentSearch = object.enableCommentContentSearch ?? false;
     return message;
   },
 };

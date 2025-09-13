@@ -169,6 +169,8 @@ message WorkspaceSetting {
     bool enable_blur_nsfw_content = 9;
     // nsfw_tags is the list of tags that mark content as NSFW for blurring.
     repeated string nsfw_tags = 10;
+    // enable_comment_content_search enables searching within comment content.
+    bool enable_comment_content_search = 11;
   }
 }
 
